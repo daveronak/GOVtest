@@ -1,0 +1,92 @@
+<div class="well">
+  <h2>Some Useful Government Service</h2>
+
+  <form novalidate name="applicationForm" ng-submit="applicationForm.$valid && applicationCtrl.saveUser(applicationCtrl.newUser)">
+    <div class="row">
+      <div class="col-xs-3">
+        <label for="name">Name</label>
+      </div>
+      <div class="col-xs-9">
+        <p class="input-group">
+          <input class="form-control"
+                 type="text"
+                 id="name"
+                 name="name"
+                 ng-minlength="3"
+                 ng-required="true"
+                 ng-model="applicationCtrl.newUser.name">
+        </p>
+        <div ng-show="applicationForm.$submitted || applicationForm.name.$touched">
+            <div ng-show="applicationForm.name.$error.required" id="nameMissingWarning" class="alert alert-danger">Tell us your name.</div>
+            <div ng-show="applicationForm.name.$error.minlength" id="nameShortWarning" class="alert alert-danger">Name should be at least 3 character long.</div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3"><label for="sex">Sex</label></div>
+      <div class="col-xs-9">
+        <p class="input-group">
+        <div class="btn-group">
+          <input type="hidden" name="sex" id="sex" required ng-model="applicationCtrl.newUser.sex">
+          <label class="btn btn-default"
+                 ng-class="{ 'btn-success' : applicationCtrl.newUser.sex==='Male'}"
+                 ng-model="applicationCtrl.newUser.sex"
+                 uib-btn-radio="'Male'"
+                 id="sex-male-button"
+                 uncheckable>Male</label>
+          <label class="btn btn-default"
+                 ng-class="{ 'btn-success' : applicationCtrl.newUser.sex==='Female'}"
+                 ng-model="applicationCtrl.newUser.sex"
+                 uib-btn-radio="'Female'"
+                 uncheckable>Female</label>
+        </div>
+        </p>
+        <div ng-show="applicationForm.$submitted || applicationForm.sex.$touched">
+          <div ng-show="applicationForm.sex.$error.required" class="alert alert-danger">Tell us your sex.</div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3"><label for="age">Age</label></div>
+      <div class="col-xs-9">
+        <p class="input-group">
+          <input type="number"
+                 class="form-control"
+                 ng-model="applicationCtrl.newUser.age"
+                 name="age"
+                 min="1"
+                 max="150"
+                 id="age"
+                 ng-required="true">
+        </p>
+        <div ng-show="applicationForm.$submitted || applicationForm.age.$touched">
+          <div ng-show="applicationForm.age.$error.required" class="alert alert-danger">Tell us your age.</div>
+          <div ng-show="applicationForm.age.$error.min" class="alert alert-danger">Your age cannot be under 1.</div>
+          <div ng-show="applicationForm.age.$error.max" class="alert alert-danger">Your age cannot be over 150.</div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3"><label for="country">Country</label></div>
+      <div class="col-xs-9">
+        <p class="input-group">
+          <select class="form-control"
+                  ng-required="true"
+                  id="country"
+                  name="country"
+                  ng-model="applicationCtrl.newUser.country"
+                  ng-options="country.name as country.name for country in applicationCtrl.countries">
+          </select>
+        </p>
+        <div ng-show="applicationForm.$submitted || applicationForm.country.$touched">
+          <div ng-show="applicationForm.country.$error.required" id="countryMissingWarning" class="alert alert-danger">Tell us your country.</div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <button class="btn btn-success" id="apply-button">Apply</button>
+      </div>
+    </div>
+  </form>
+</div>
